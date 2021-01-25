@@ -4,6 +4,8 @@
 
 适用于电脑不在身边或者不方便打开电脑的情况下查看每日一题。
 
+灵感来自于 Wchert 的项目：https://github.com/Wchert/leetcode-every-day-auto-push
+
 ## 使用
 1. Fork此项目
 2. 在仓库Settings -> Secrets -> New Repository Secret -> 创建 MAILPASSWORD、MAILUSERNAME（邮箱密码、用户名）
