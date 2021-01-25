@@ -2,8 +2,7 @@
 import requests
 import json
 import smtplib
-import email
-#from email.mime.text import MIMEText
+from email.mime.text import MIMEText
 
 base_url = 'https://leetcode-cn.com'
 # 获取今日每日一题的题名(英文)
