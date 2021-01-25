@@ -1,4 +1,5 @@
 # coding=<encoding name> ： # coding=utf-8
+#!/usr/bin/python
 import requests
 import json
 import smtplib
