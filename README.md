@@ -1,4 +1,4 @@
-# LeetCode
+# 自动发送 LeetCode每日一题 至邮箱
 
 利用Action 每天早上八点 发送LeetCode每日一题到邮箱。
 
