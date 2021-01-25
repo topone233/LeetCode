@@ -9,10 +9,11 @@ curl \
   -H "Accept-Language: $LANGUAGE" \
   -H "User-Agent: $UA" \
   -h "Content-Type: application/json"
+  -X POST
   -d "{
     "operationName": "questionOfToday",
     "variables": {},
     "query": "query questionOfToday { todayRecord {   question {     questionFrontendId     questionTitleSlug     __typename   }   lastSubmission {     id     __typename   }   date   userStatus   __typename }}"
 }"
   -o result.html \
-  https://leetcode-cn.com/graphql/$CITY?format=4\&$UNIT
+  https://leetcode-cn.com/graphql
