@@ -1,0 +1,52 @@
+# This is a basic workflow to help you get started with Actions
+
+name: 'LeetCode'
+
+# Controls when the action will run. 执行的触发条件
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # 定时任务，每天在国际标准时间23点（北京时间早上7点）运行
+  schedule:
+    - cron: '0 23 * * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+      
+      - name: 'Request LeetCode Daily Question'
+        run: bash ./LeetCode.sh
+      # 获取时间，邮件发送主题附带日期  
+      - name: 'Get Date'
+        run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >> $GITHUB_ENV
+      
+      - name: 'Send Email'
+        uses: dawidd6/action-send-mail@master
+        with:
+          serveraddress: smtp.163.com
+          serverport: 465
+          username: ${{ secrets.MAILUSERNAME }}
+          password: ${{ secrets.MAILPASSWORD }}
+          subject: LeetCode Daily Question (${{env.REPORT_DATE}})
+          body: file://result.html
+          to: 809549807@qq.com
+          from: GitHub Actions
+          content_type: text/html      
