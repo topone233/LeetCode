@@ -36,8 +36,8 @@ jobs:
         #  python -m pip install --upgrade pip
          # pip install MIMEText
       
-      - name: 'Request LeetCode Daily Question'
-        run: bash ./LeetCode.sh
+      #- name: 'Request LeetCode Daily Question'
+       # run: bash ./LeetCode.sh
       # 获取时间，邮件发送主题附带日期  
       - name: 'Get Date'
         run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >> $GITHUB_ENV
