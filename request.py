@@ -49,7 +49,7 @@ htmlText = """ <head>
     <body>
 <div>
     <h3>Leetcode-每日一题</h3>
-    <h4>""" + no + '.' + leetcodeTitle + '.' + level + """</h4>""" + context + '本题连接：<a href=' + url + ">" + url + "</a></div>" + info
+    <h4>""" + no + '.' + leetcodeTitle + '.' + level + """</h4>""" + context + '本题连接：<a href=' + url + ">" + url + "</a></div>"
 
 
 # 邮箱类
@@ -90,11 +90,11 @@ if __name__ == '__main__':
     # 开启SMTP时的密码
     password = ${{ secrets.MAILPASSWORD }}
     # 邮件上显示的昵称
-    show_name = "小灿智能助手"
+    show_name = "QSX1C"
     # 收件人邮箱账户（可多人）
     user_list = ["809549807@qq.com"]
     # 邮件标题
-    title = "每日信息推送"
+    title = no
     message = htmlText
     send = SendEmail(show_name, send_user, email_host, email_port, password, user_list, title, message)
     send.send_email()
