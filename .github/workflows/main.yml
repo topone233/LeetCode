@@ -27,6 +27,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      # 安装python3.7
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
         with:
@@ -34,21 +35,11 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          #python -m pip install --upgrade pip setuptools wheel
           pip install requests
-          #pip install PyEmail
-          #pip install json
-          #pip install smtplib
-          #pip install email
-      
-      #- name: 'Request LeetCode Daily Question'
-       # run: bash ./LeetCode.sh
-      # 获取时间，邮件发送主题附带日期  
-      #- name: 'Get Date'
-       # run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >> $GITHUB_ENV
       
       - name: 'Send Email'
         env:
+          # 从仓库的setting中设置两个secret，加密邮箱用户名和密码
           username: ${{ secrets.MAILUSERNAME }}
           pwd: ${{ secrets.MAILPASSWORD }}  
         run: python request.py
