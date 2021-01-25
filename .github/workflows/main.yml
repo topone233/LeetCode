@@ -5,10 +5,10 @@ name: 'LeetCode'
 # Controls when the action will run. 执行的触发条件
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  #push:
+   # branches: [ main ]
+  #pull_request:
+   # branches: [ main ]
   # 定时任务，每天在国际标准时间23点（北京时间早上7点）运行
   schedule:
     - cron: '0 23 * * *'
