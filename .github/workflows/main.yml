@@ -34,8 +34,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests
-          pip install json
+          python ez_setup.py –U setuptools
+          #pip install requests
+          easy_install json
           pip install smtplib
           pip install email
       
