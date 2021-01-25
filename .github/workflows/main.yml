@@ -27,10 +27,14 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install MIMEText
       
       - name: 'Request LeetCode Daily Question'
         run: bash ./LeetCode.sh
@@ -39,14 +43,4 @@ jobs:
         run: echo "REPORT_DATE=$(TZ=':Asia/Shanghai' date '+%Y-%m-%d')" >> $GITHUB_ENV
       
       - name: 'Send Email'
-        uses: dawidd6/action-send-mail@master
-        with:
-          serveraddress: smtp.163.com
-          serverport: 465
-          username: ${{ secrets.MAILUSERNAME }}
-          password: ${{ secrets.MAILPASSWORD }}
-          subject: LeetCode Daily Question (${{env.REPORT_DATE}})
-          body: file://result.html
-          to: 809549807@qq.com
-          from: GitHub Actions
-          content_type: text/html      
+        run: bash ./request.py
