@@ -1,4 +1,12 @@
 # LeetCode
+
 利用Action 每天早上八点 发送LeetCode每日一题到邮箱。
+
 适用于电脑不在身边或者不方便打开电脑的情况下查看每日一题。
 
+## 使用
+1. Fork此项目
+2. 在仓库Settings -> Secrets -> New Repository Secret -> 创建 MAILPASSWORD、MAILUSERNAME
+3. 开启邮箱STOMP服务，记得保存授权码（作为密码 也就是MAILPASSWORD）
+4. 如果是163邮箱跳过。其他邮箱服务器，记得修改邮箱地址
+5. Actions -> LeetCode -> Run workflowe 大功告成！
