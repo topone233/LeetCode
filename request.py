@@ -3,6 +3,7 @@
 import requests
 import json
 import smtplib
+import os
 from email.mime.text import MIMEText
 
 base_url = 'https://leetcode-cn.com'
@@ -29,6 +30,8 @@ leetcodeTitle = jsonText.get('translatedTitle')
 level = jsonText.get('difficulty')
 # 题目内容
 context = jsonText.get('translatedContent')
+uname = os.environ["username"]
+pwd = os.environ["pwd"]
 
 # print(leetcodeTitle)
 # print(context)
@@ -65,6 +68,7 @@ class SendEmail:
         self.message = message
         self.title = title
 
+        
     def send_email(self):
         try:
             user = self.show_name + "<" + self.send_user + ">"
@@ -84,12 +88,12 @@ class SendEmail:
 
 if __name__ == '__main__':
     # 发件人邮箱
-    send_user = ${{ secrets.MAILUSERNAME }}
+    send_user = uname
     # 邮箱对应的host
     email_host = "smtp.163.com"
     email_port = 465
     # 开启SMTP时的密码
-    password = ${{ secrets.MAILPASSWORD }}
+    password = pwd
     # 邮件上显示的昵称
     show_name = "QSX1C"
     # 收件人邮箱账户（可多人）
