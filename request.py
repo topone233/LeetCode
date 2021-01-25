@@ -11,8 +11,7 @@ base_url = 'https://leetcode-cn.com'
 response = requests.post(base_url + "/graphql", json={
     "operationName": "questionOfToday",
     "variables": {},
-    "query": "query questionOfToday 
-    { 
+    "query": "query questionOfToday { 
         todayRecord {  
             question { questionFrontendId     questionTitleSlug     __typename   }   
             lastSubmission {     id     __typename   }   
@@ -29,8 +28,7 @@ url = base_url + "/problems/" + leetcodeTitle
 response = requests.post(base_url + "/graphql", json={
     "operationName": "questionData", 
     "variables": {"titleSlug": leetcodeTitle},
-    "query": "query questionData($titleSlug: String!) 
-    { 
+    "query": "query questionData($titleSlug: String!) { 
         question(titleSlug: $titleSlug) {    
             questionId    questionFrontendId    boundTopicId    title    titleSlug   
             content    translatedTitle    translatedContent    isPaidOnly    difficulty   
