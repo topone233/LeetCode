@@ -33,10 +33,10 @@ jobs:
           python-version: '3.7'
       - name: Install dependencies
         run: |
-          #python -m pip install --upgrade pip
-          python -m pip install --upgrade pip setuptools wheel
-          pip install requests
-          pip install PyEmail
+          python -m pip install --upgrade pip
+          #python -m pip install --upgrade pip setuptools wheel
+          #pip install requests
+          #pip install PyEmail
           #pip install json
           #pip install smtplib
           #pip install email
