@@ -37,9 +37,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests
       
-      - name: 'Send Email'
+      - name: 'Send Message'
         env:
-          # 从仓库的setting中设置两个secret，加密邮箱用户名和密码
+          # 从仓库的setting中设置三个secret，加密邮箱用户名和密码和Pushplus的Toekn
           username: ${{ secrets.MAILUSERNAME }}
           pwd: ${{ secrets.MAILPASSWORD }}  
+          token: ${{ secrets.TOKEN }}  
         run: python request.py

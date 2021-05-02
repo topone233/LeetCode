@@ -4,6 +4,8 @@ import requests
 import json
 import smtplib
 import os
+import traceback
+import urllib
 from email.mime.text import MIMEText
 
 base_url = 'https://leetcode-cn.com'
@@ -31,8 +33,20 @@ leetcodeTitle = jsonText.get('translatedTitle')
 level = jsonText.get('difficulty')
 # 题目内容
 context = jsonText.get('translatedContent')
-uname = os.environ["username"]
-pwd = os.environ["pwd"]
+if(os.environ.get("username")):
+    uname = os.environ["username"]
+else:
+    uname = None
+
+if(os.environ.get("pwd")):
+    pwd = os.environ["pwd"]
+else:
+    pwd = None
+
+if(os.environ.get("token")):
+    token = os.environ["token"]
+else:
+    token = None
 
 # print(leetcodeTitle)
 # print(context)
@@ -88,19 +102,48 @@ class SendEmail:
 
 
 if __name__ == '__main__':
-    # 发件人邮箱
-    send_user = uname
-    # 邮箱对应的host
-    email_host = "smtp.163.com"
-    email_port = 465
-    # 开启SMTP时的密码
-    password = pwd
-    # 邮件上显示的昵称
-    show_name = "QSX1C"
-    # 收件人邮箱账户（可多人）
-    user_list = ["809549807@qq.com"]
-    # 邮件标题
-    title = no
-    message = htmlText
-    send = SendEmail(show_name, send_user, email_host, email_port, password, user_list, title, message)
-    send.send_email()
+    if uname is not None:
+        try:
+            # 发件人邮箱
+            send_user = uname
+            # 邮箱对应的host
+            email_host = "smtp.163.com"
+            email_port = 465
+            # 开启SMTP时的密码
+            password = pwd
+            # 邮件上显示的昵称
+            show_name = "QSX1C"
+            # 收件人邮箱账户（可多人）
+            user_list = ["809549807@qq.com"]
+            # 邮件标题
+            title = no
+            message = htmlText
+            send = SendEmail(show_name, send_user, email_host, email_port, password, user_list, title, message)
+            send.send_email()
+        except Exception as e:
+            print('push+通知推送异常，原因为: ' + str(e))
+            print(traceback.format_exc())
+    else:
+        print("未配置邮箱")
+
+    if token is not None:
+        #发送push+通知
+        try:
+            #发送内容
+            data = {
+                "token": token,
+                "title": "LeeCode每日一题",
+                "content": htmlText
+            }
+            url = 'http://www.pushplus.plus/send'
+            headers = {'Content-Type': 'application/json'}
+            body = json.dumps(data).encode(encoding='utf-8')
+            resp = requests.post(url, data=body, headers=headers)
+            print(resp)
+        except Exception as e:
+            print('push+通知推送异常，原因为: ' + str(e))
+            print(traceback.format_exc())
+    else:
+        print("未配置pushplus")
+    
+    
